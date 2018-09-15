@@ -1,0 +1,95 @@
+<div class="container">
+  <div class="row">
+    <!-- BEGIN SEARCH RESULT -->
+    <div class="col-md-12">
+      <div class="grid search">
+        <div class="grid-body">
+          <div class="row">
+            <!-- BEGIN FILTERS -->
+            <div class="col-md-3">
+              <h2 class="grid-title">
+                <i class="fa fa-filter"></i> Filters</h2>
+              <hr>
+
+              <!-- BEGIN FILTER BY CATEGORY -->
+              <h4>By category:</h4>
+              <div class="checkbox" *ngFor="let category of categoryList$">
+                <label>
+                  <input (change)="LoadProductList()" value="{{ category.CategoryId }}" type="checkbox" class="icheck"> {{ category.Name }}</label>
+              </div>
+              <!-- END FILTER BY CATEGORY -->
+              
+
+              <div class="padding"></div>
+              
+            </div>
+            <!-- END FILTERS -->
+            <!-- BEGIN RESULT -->
+            <div class="col-md-9">
+              <h2>
+                <i class="fa fa-file-o"></i> Products</h2>
+              <hr>
+              <!-- BEGIN SEARCH INPUT -->
+              <div class="input-group">
+                <input id="txtSearch" type="text" class="form-control" value="">
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" type="button" (click)="LoadProductList()">
+                    <i class="fa fa-search"></i>
+                  </button>
+                </span>
+              </div>
+              <!-- END SEARCH INPUT -->
+              
+              <div class="padding"></div>
+
+              <div class="row">
+                <!-- BEGIN ORDER RESULT -->
+                <div class="col-sm-6">
+                  
+                </div>
+                <!-- END ORDER RESULT -->
+
+                <div class="col-md-6 text-right">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default active">
+                     <a href="product/0"> <i title="Add New Product" class="fa fa-plus"></i></a>
+                    </button>
+                    
+                  </div>
+                </div>
+              </div>
+
+              <!-- BEGIN TABLE RESULT -->
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <tbody>
+                    <tr *ngFor="let product of productList$">
+                      <td class="product">
+                        <a href='product/{{product.ProductId}}' > <strong>{{ product.Name }}</strong></a>
+                        <br>{{ product.Description }}</td>
+                      <td class="rate text-right">
+                       
+                      </td>
+                      <td>
+                        <span *ngFor="let attr of product.ProductAttributes" class="align-items-center">
+                          <b>{{attr.ProductAttributeLookup.AttributeName}} :  </b>
+                          <span >{{attr.AttributeValue}}</span> ,
+                        </span>
+                      </td>
+                    
+                  </tbody>
+                </table>
+              </div>
+              <!-- END TABLE RESULT -->
+
+                          
+              <!-- END PAGINATION -->
+            </div>
+            <!-- END RESULT -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END SEARCH RESULT -->
+  </div>
+</div>

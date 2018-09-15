@@ -1,0 +1,58 @@
+<!-- main app container -->
+<div class="jumbotron">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-6 offset-md-3">
+              <h3>Product</h3>
+              <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                  <input type="hidden" formControlName="ProductId" />
+                  <div class="form-group">
+                      <label>Product Name</label>
+                      <input type="text" formControlName="Name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Name.errors }" />
+                      <div *ngIf="submitted && f.Name.errors" class="invalid-feedback">
+                          <div *ngIf="f.Name.errors.required">Product Name is required</div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label>Description</label>
+                      <input type="text" formControlName="Description" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Description.errors }" />
+                      <div *ngIf="submitted && f.Description.errors" class="invalid-feedback">
+                          <div *ngIf="f.Description.errors.required">Product Description is required</div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label>Category</label>
+                      <select [(ngModel)]="CategoryId" formControlName="CategoryId" (change)="onChange($event)" ng-model="cmbAll" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.CategoryId.errors }">
+                        <option [value]="" >Select Category</option>
+                        <option *ngFor="let category of categoryList$" value="{{category.CategoryId}}">{{ category.Name }}</option>
+                      </select>
+                      <div *ngIf="submitted && f.CategoryId.errors" class="invalid-feedback">
+                          <div *ngIf="f.CategoryId.errors.required"> Category is required</div>
+                      </div>
+                  </div>
+                  <div formArrayName="ProductAttributes"
+                  *ngFor="let item of registerForm.get('ProductAttributes').controls; let i = index;">
+                  <div [formGroupName]="i">
+                      <input type="hidden" formControlName="AttributeId" class="form-control"  />
+                      <label  >{{item.value.AttributeName}}</label>
+                      <div class="form-group">
+                          
+                          <input type="text" formControlName="AttributeValue" class="form-control" />
+                          <div *ngIf="submitted && f.AttributeValue" class="invalid-feedback">
+                              <div *ngIf="f.AttributeValue.required">Attribute Value is required</div>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="button-group">
+                    <button class="btn btn-primary">Save</button>
+                  &nbsp;
+                    <a href="/product-list" class="btn btn-primary" >Back</a>
+                  </div>
+                </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
