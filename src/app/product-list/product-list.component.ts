@@ -25,11 +25,11 @@ export class ProductListComponent implements OnInit {
   LoadProductList(){
     this.Category=[];
     this.ProductName = (document.getElementById("txtSearch") as HTMLInputElement).value;
-    var checks=   document.getElementsByClassName("icheck") as HTMLCollectionOf<Element>;
+    var checks=   document.getElementsByClassName("icheck") as HTMLCollectionOf<HTMLInputElement>;
     for (var index = 0; index < checks.length; index++) {
       var element = checks[index];
       if(element.checked==true){
-        this.Category.push(element.value);
+        this.Category.push(parseInt(element.value));
       }
     }
     if(this.Category.length ==0)
